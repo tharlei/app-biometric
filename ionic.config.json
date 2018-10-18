@@ -1,0 +1,8 @@
+{
+  "name": "aps_biometria",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

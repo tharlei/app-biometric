@@ -1,0 +1,18 @@
+page-login {
+    .body {
+        overflow-y: none;
+    }
+    img {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 5px;
+        border: 0px;
+    }
+    ion-item > .item-inner {
+        border-bottom: 0px!important;
+    }
+
+    .button {
+        margin-top: 10%;
+    }
+}

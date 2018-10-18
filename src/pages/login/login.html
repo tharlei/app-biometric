@@ -1,0 +1,19 @@
+<ion-content class="body" padding>
+    <ion-item>
+      <img src="assets/imgs/logo.png" alt="MyApp">
+    </ion-item>
+
+  <form (ngSubmit)="efetuarLogin()">
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [(ngModel)]="email" name="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Senha</ion-label>
+      <ion-input [(ngModel)]="password" name="password"></ion-input>
+    </ion-item>
+
+    <button ion-button block>Entrar</button>
+  </form>
+</ion-content>
