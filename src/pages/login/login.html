@@ -1,6 +1,6 @@
 <ion-content class="body" padding>
     <ion-item>
-      <img src="assets/imgs/logo.png" alt="MyApp">
+      <img src="assets/imgs/logo-gov.png" alt="MyApp">
     </ion-item>
 
   <form (ngSubmit)="efetuarLogin()">
@@ -15,6 +15,6 @@
     </ion-item>
 
     <button ion-button block>Entrar</button>
-    <button ion-button block color="success">Registrar</button>
+    <button ion-button block color="success" (click)="openRegister()">Registrar</button>
   </form>
 </ion-content>
