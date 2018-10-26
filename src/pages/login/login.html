@@ -3,10 +3,10 @@
         <img src="assets/imgs/logo-gov.png" alt="MyApp">
     </ion-item>
 
-    <form (ngSubmit)="efetuarLogin()" #formulario="ngForm">
+    <form [class]="armazenado ? 'sumir' : ''" (ngSubmit)="efetuarLogin()" #formulario="ngForm">
         <ion-item>
             <ion-label floating>E-mail</ion-label>
-            <ion-input [(ngModel)]="email" name="email"></ion-input>
+            <ion-input [(ngModel)]="email" id="email" name="email"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -16,7 +16,18 @@
         <h6 ion-text end color="grey">Esqueceu a senha?</h6>
     </form>
 
-    <button ion-button block color="secondary" (click)="formulario.ngSubmit.emit()">Entrar</button>
-    <ion-item-divider></ion-item-divider>
-    <button ion-button block color="orange" (click)="irCadastro()">Criar nova Conta</button>
+    <ion-item-group *ngIf="(!armazenado)" > 
+        <button ion-button block color="secondary" (click)="formulario.ngSubmit.emit()">Entrar</button>
+        <ion-item-divider></ion-item-divider>
+        <button ion-button block color="orange" (click)="irCadastro()">Criar nova Conta</button>
+    </ion-item-group>
+
+    <ion-item-group *ngIf="(armazenado)" >
+        <ion-label>Confirme suas credencias com biometria:</ion-label>
+        <button ion-button block color="secondary" (click)="autenticacao()">
+            <ion-icon name="finger-print"></ion-icon>
+        </button>
+        <ion-item-divider></ion-item-divider>
+        <button ion-button block color="danger" (click)="reset()" >Reinserir Credenciais</button>
+    </ion-item-group>
 </ion-content>

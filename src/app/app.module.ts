@@ -16,6 +16,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage'
 import { InterceptorProvider } from '../providers/interceptor/interceptor';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 @NgModule({
   declarations: [
@@ -41,8 +42,9 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RegisterServiceProvider,
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true},
-    LoginServiceProvider
+    LoginServiceProvider,
+    // { provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true},
+    FingerprintAIO 
   ]
 })
 export class AppModule {}

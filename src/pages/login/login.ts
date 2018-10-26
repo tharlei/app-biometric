@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 @IonicPage()
 @Component({
@@ -13,6 +14,7 @@ import { HomePage } from '../home/home';
 })
 export class LoginPage {
 
+  public armazenado: boolean = false;
   public email: string = '';
   public password: string = '';
 
@@ -20,10 +22,29 @@ export class LoginPage {
     private _alerta: AlertController,
     private _loginService: LoginServiceProvider,
     private _storage: Storage,
-    private _loading: LoadingController) {
+    private _loading: LoadingController,
+    private _finger: FingerprintAIO) {
   }
 
   ionViewDidLoad() {
+    this._storage.get('email').then(val => {
+      if (val) {
+        this.email = val;
+        this._finger.isAvailable().then(res => {
+          this.armazenado = (res == 'OK' ? true : false);
+        })
+        .catch(err => console.log(err));
+      }
+    });
+    this._storage.get('password').then(val => {
+      if (val) {
+        this.password = val;
+        this._finger.isAvailable().then(res => {
+          this.armazenado = (res == 'OK' ? true : false);
+        })
+        .catch(err => console.log(err));
+      }
+    });
   }
 
   efetuarLogin() {
@@ -74,5 +95,25 @@ export class LoginPage {
     }).present();
 
     return [{'erro':true, 'msg':msg}];
+  }
+
+  reset() {
+    this._storage.remove('email');
+    this._storage.remove('password');
+    this.armazenado = false
+    this.email = '';
+    this.password = '';
+  }
+
+  autenticacao() {
+    this._finger.show({
+      clientId: 'aps-biometria',
+      clientSecret: 'password', 
+      disableBackup:true,  
+      localizedFallbackTitle: 'Use Pin', 
+      localizedReason: 'Please authenticate' 
+  })
+  .then((result: any) => (result == 'OK' ? this.efetuarLogin() : ''))
+  .catch((error: any) => console.log(error));
   }
 }
