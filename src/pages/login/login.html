@@ -1,20 +1,22 @@
 <ion-content class="body" padding>
     <ion-item>
-      <img src="assets/imgs/logo-gov.png" alt="MyApp">
+        <img src="assets/imgs/logo-gov.png" alt="MyApp">
     </ion-item>
 
-  <form (ngSubmit)="efetuarLogin()">
-    <ion-item>
-      <ion-label floating>E-mail</ion-label>
-      <ion-input [(ngModel)]="email" name="email"></ion-input>
-    </ion-item>
+    <form (ngSubmit)="efetuarLogin()" #formulario="ngForm">
+        <ion-item>
+            <ion-label floating>E-mail</ion-label>
+            <ion-input [(ngModel)]="email" name="email"></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label floating>Senha</ion-label>
-      <ion-input [(ngModel)]="password" name="password"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label floating>Senha</ion-label>
+            <ion-input [(ngModel)]="password" name="password"></ion-input>
+        </ion-item>
+        <h6 ion-text end color="grey">Esqueceu a senha?</h6>
+    </form>
 
-    <button ion-button block>Entrar</button>
-    <button ion-button block color="success" (click)="openRegister()">Registrar</button>
-  </form>
+    <button ion-button block color="secondary" (click)="formulario.ngSubmit.emit()">Entrar</button>
+    <ion-item-divider></ion-item-divider>
+    <button ion-button block color="orange" (click)="irCadastro()">Criar nova Conta</button>
 </ion-content>

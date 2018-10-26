@@ -1,35 +1,39 @@
 <ion-header>
 
-  <ion-navbar color="primary">
+<ion-navbar color="primary">
     <ion-title>Registrar</ion-title>
-  </ion-navbar>
+</ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-    <ion-item>
-      <img src="assets/imgs/logo-gov.png" alt="MyApp">
-    </ion-item>
 
-    <form>
-      <ion-item>
-        <ion-label floating>Nome</ion-label>
-        <ion-input type="text" name=""></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>E-mail</ion-label>
-        <ion-input type="text" name=""></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Senha</ion-label>
-        <ion-input type="password" name="title"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Confirmação da senha</ion-label>
-        <ion-input type="password" name="title"></ion-input>
-      </ion-item>
-      <ion-item>
-        <button ion-button type="submit" block>CADASTRAR</button>
-      </ion-item>
+    <form (ngSubmit)="efetuarCadastro()" #formulario="ngForm">
+        <ion-item-group>
+            <ion-item>
+                <ion-label floating>Nome</ion-label>
+                <ion-input [(ngModel)]="name" name="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>E-mail</ion-label>
+                <ion-input [(ngModel)]="email" name="email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Senha</ion-label>
+                <ion-input [(ngModel)]="password" name="password"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Confirme senha</ion-label>
+                <ion-input [(ngModel)]="password_check" name="password_check"></ion-input>
+            </ion-item>
+        </ion-item-group>
     </form>
+
+    <button ion-button block color="secondary" (click)="formulario.ngSubmit.emit()">
+        Cadastrar-se
+    </button>
+
 </ion-content>
