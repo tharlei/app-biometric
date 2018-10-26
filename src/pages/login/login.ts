@@ -46,6 +46,8 @@ export class LoginPage {
     .subscribe(
       res => {
         this._storage.set('token', res);
+        this._storage.set('email', usuario.email);
+        this._storage.set('password', usuario.password);
         loading.dismiss();
         this._navCtrl.setRoot(HomePage);
       },
