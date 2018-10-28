@@ -1,6 +1,12 @@
 {
-  "name": "aps_biometria",
+  "name": "MyAps",
   "app_id": "",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://cors.api.com/api"
+    }
+  ],
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

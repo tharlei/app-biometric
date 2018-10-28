@@ -1,6 +1,7 @@
+import { Info } from './../../models/info';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
 @Component({
@@ -9,13 +10,19 @@ import { LoginPage } from '../login/login';
 })
 export class HomePage {
 
-  constructor(private _navCtrl: NavController,
-    private _storage: Storage) {
+  public infos: Info[];
 
+  constructor(private _navCtrl: NavController,
+    private _navParams: NavParams,
+    private _storage: Storage) {
+      this.infos = this._navParams.get('informacoes');
+  }
+
+  ionViewDidLoad() {
   }
 
   exit() {
     this._storage.remove('token');
-    this._navCtrl.setRoot(LoginPage.name);
+    this._navCtrl.setRoot(LoginPage);
   }
 }

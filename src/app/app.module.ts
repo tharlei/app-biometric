@@ -17,11 +17,14 @@ import { IonicStorageModule } from '@ionic/storage'
 import { InterceptorProvider } from '../providers/interceptor/interceptor';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
+import { LoginPage } from '../pages/login/login';
+import { InfosServiceProvider } from '../providers/infos-service/infos-service';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -43,8 +47,9 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RegisterServiceProvider,
     LoginServiceProvider,
-    // { provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true},
-    FingerprintAIO 
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true},
+    FingerprintAIO,
+    InfosServiceProvider 
   ]
 })
 export class AppModule {}

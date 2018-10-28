@@ -1,13 +1,12 @@
+import { InfosServiceProvider } from './../../providers/infos-service/infos-service';
 import { Storage } from '@ionic/storage';
 import { LoginServiceProvider } from './../../providers/login-service/login-service';
-import { Usuario } from './../../models/usuario';
+import { Login } from './../../models/login';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
-import { RegisterPage } from '../register/register';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -23,7 +22,8 @@ export class LoginPage {
     private _loginService: LoginServiceProvider,
     private _storage: Storage,
     private _loading: LoadingController,
-    private _finger: FingerprintAIO) {
+    private _finger: FingerprintAIO,
+    private _infosService: InfosServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -31,7 +31,7 @@ export class LoginPage {
       if (val) {
         this.email = val;
         this._finger.isAvailable().then(res => {
-          this.armazenado = (res == 'OK' ? true : false);
+          this.armazenado = true;
         })
         .catch(err => console.log(err));
       }
@@ -40,7 +40,8 @@ export class LoginPage {
       if (val) {
         this.password = val;
         this._finger.isAvailable().then(res => {
-          this.armazenado = (res == 'OK' ? true : false);
+          this._chamarAlerta('finger', res);
+          this.armazenado = true;
         })
         .catch(err => console.log(err));
       }
@@ -57,8 +58,7 @@ export class LoginPage {
     //
     loading.present();
     //
-    let usuario: Usuario = {
-      name: null,
+    let usuario: Login = {
       email: this.email,
       password: this.password
     }
@@ -66,11 +66,21 @@ export class LoginPage {
     this._loginService.acessar(usuario)
     .subscribe(
       res => {
-        this._storage.set('token', res);
+        this._storage.set('token', (res['token_type'] + " " + res['access_token']));
         this._storage.set('email', usuario.email);
         this._storage.set('password', usuario.password);
-        loading.dismiss();
-        this._navCtrl.setRoot(HomePage);
+        this._infosService.lista()
+          .subscribe(res => {
+            loading.dismiss();
+            this._navCtrl.setRoot(HomePage, {
+              informacoes: res
+            });
+          },
+          err => {
+            console.log(err);
+            loading.dismiss();
+            this._chamarAlerta("Erro na informações", "Não foi possivel obter informações!");
+          });
       },
       err =>  {
         console.log(err);
@@ -79,10 +89,6 @@ export class LoginPage {
         return false;
       }
     );
-  }
-
-  irCadastro() {
-    this._navCtrl.push(RegisterPage.name);
   }
 
   _chamarAlerta(titulo: string, msg: string) {

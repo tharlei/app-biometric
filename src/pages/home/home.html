@@ -1,9 +1,19 @@
 <ion-header>
-  <ion-navbar color="secondary">
-        <ion-title>Noticias da Natureza</ion-title>
+  <ion-navbar color="green">
+        <ion-title>Informações</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-icon ion-button name="log-out" (click)="exit()" ></ion-icon>
+
+  <ion-item *ngFor="let info of infos" >
+    <h2>{{info.title}}</h2>
+    <small>{{info.subtitle}}</small>
+  </ion-item>
+
+  <ion-fab top right edge>
+    <button ion-fab mini color="danger" (click)="exit()" >
+      <ion-icon name="exit"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

@@ -1,5 +1,4 @@
 import { HomePage } from './../home/home';
-import { Usuario } from './../../models/usuario';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
 import { RegisterServiceProvider } from '../../providers/register-service/register-service';
@@ -42,38 +41,38 @@ export class RegisterPage {
     //
     loading.present();
     //
-    let usuario: Usuario = {
-      name: this.name,
-      email: this.email,
-      password: this.password
-    }
+    // let usuario: Usuario = {
+    //   name: this.name,
+    //   email: this.email,
+    //   password: this.password
+    // }
     //
-    this._registerService.registrar(usuario)
-      .subscribe(
-        res => {
-          this._storage.set('token', res);
-          this._storage.set('email', usuario.email);
-          this._storage.set('password', usuario.password);
-          loading.dismiss();
-          this._alerta.create({
-            title: 'Cadastro realizado com sucesso!',
-            buttons: [
-              {
-                text: "OK",
-                handler: () => {
-                  this._navCtrl.setRoot(HomePage);
-                }
-              }
-            ]
-          }).present();
-        },
-        err =>  {
-          console.log(err);
-          loading.dismiss();
-          this._chamarAlerta('Erro ao cadastrar', 'Falha no cadastro! Tente novamente mais tarde!');
-          return false;
-        }
-      );
+    // this._registerService.registrar(usuario)
+    //   .subscribe(
+    //     res => {
+    //       this._storage.set('token', res);
+    //       this._storage.set('email', usuario.email);
+    //       this._storage.set('password', usuario.password);
+    //       loading.dismiss();
+    //       this._alerta.create({
+    //         title: 'Cadastro realizado com sucesso!',
+    //         buttons: [
+    //           {
+    //             text: "OK",
+    //             handler: () => {
+    //               this._navCtrl.setRoot(HomePage);
+    //             }
+    //           }
+    //         ]
+    //       }).present();
+    //     },
+    //     err =>  {
+    //       console.log(err);
+    //       loading.dismiss();
+    //       this._chamarAlerta('Erro ao cadastrar', 'Falha no cadastro! Tente novamente mais tarde!');
+    //       return false;
+    //     }
+    //   );
   }
 
   _chamarAlerta(titulo: string, msg: string) {

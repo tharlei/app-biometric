@@ -22,4 +22,19 @@ page-login {
     .sumir {
         display: none;
     }
+    .body {
+        background-image: linear-gradient(to top, #065d16 0%, #127824 100%);
+    }
+    ion-item, ion-item-divider {
+        background-color: rgba(255, 255, 255, 0)!important;
+    }
+    ion-label, h6 {
+        font-weight: bold;
+    }
+    ion-input {
+        color: white;
+    }
+    button {
+        border-radius: 16px!important;
+    }
 }

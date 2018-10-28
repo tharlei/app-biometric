@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../../models/usuario';
+import { Login } from '../../models/login';
 
 @Injectable()
 export class RegisterServiceProvider {
@@ -16,8 +16,8 @@ export class RegisterServiceProvider {
   constructor(public http: HttpClient) {
   }
 
-  registrar(usuario: Usuario) {
+  registrar(usuario: Login) {
     return this.http
-        .post<Usuario>(this._url+'/register', usuario, this._options);
+        .post<Login>(this._url+'/register', usuario, this._options);
   }
 }
