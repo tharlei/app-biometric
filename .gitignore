@@ -11,8 +11,6 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
-*.jks
-*.BAT
 
 .idea/
 .ionic/
@@ -34,4 +32,6 @@ $RECYCLE.BIN/
 
 .DS_Store
 Thumbs.db
+my-release-key.jks
+START.BAT
 UserInterfaceState.xcuserstate
