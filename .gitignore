@@ -11,6 +11,8 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
+*.jks
+*.BAT
 
 .idea/
 .ionic/

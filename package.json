@@ -1,7 +1,7 @@
 {
-  "name": "aps_biometria",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "name": "nature-news",
+  "version": "0.1",
+  "author": "Tharlei Aleixo",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
