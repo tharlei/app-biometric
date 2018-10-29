@@ -4,6 +4,7 @@
     </ion-item>
 
     <form [class]="armazenado ? 'sumir' : ''" (ngSubmit)="efetuarLogin()" #formulario="ngForm">
+
         <ion-item>
             <ion-label color="light" floating>E-mail</ion-label>
             <ion-input type="email" [(ngModel)]="email" id="email" name="email"></ion-input>
@@ -24,13 +25,13 @@
     </ion-item-group>
 
     <ion-item-group *ngIf="(armazenado)">
-        <ion-label color="light">Você é {{this.email}} ?</ion-label>
+        <ion-label color="light">Você é {{this.email}}?</ion-label>
         <button ion-button block color="yellow" (click)="autenticacao()">
             <label item-start >Autenticar &nbsp;</label>
             <ion-icon item-end name="finger-print"></ion-icon>
         </button>
         <ion-item-divider></ion-item-divider>
-        <button ion-button block color="danger" (click)="reset()" >
+        <button ion-button block color="orange" (click)="reset()" >
             <label item-start >Reentrar &nbsp;</label>
             <ion-icon name="create"></ion-icon>
         </button>

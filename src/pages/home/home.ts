@@ -1,3 +1,4 @@
+import { InfoPage } from './../info/info';
 import { Info } from './../../models/info';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
@@ -24,5 +25,11 @@ export class HomePage {
   exit() {
     this._storage.remove('token');
     this._navCtrl.setRoot(LoginPage);
+  }
+
+  selecionaInfo(info: Info) {
+    this._navCtrl.push(InfoPage, {
+      infoSelecionada: info
+    });
   }
 }

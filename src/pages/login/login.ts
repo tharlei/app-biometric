@@ -40,7 +40,6 @@ export class LoginPage {
       if (val) {
         this.password = val;
         this._finger.isAvailable().then(res => {
-          this._chamarAlerta('finger', res);
           this.armazenado = true;
         })
         .catch(err => console.log(err));
@@ -66,10 +65,11 @@ export class LoginPage {
     this._loginService.acessar(usuario)
     .subscribe(
       res => {
-        this._storage.set('token', (res['token_type'] + " " + res['access_token']));
+        let token = (res['token_type'] + " " + res['access_token']);
+        this._storage.set('token', token);
         this._storage.set('email', usuario.email);
         this._storage.set('password', usuario.password);
-        this._infosService.lista()
+        this._infosService.lista(token)
           .subscribe(res => {
             loading.dismiss();
             this._navCtrl.setRoot(HomePage, {
@@ -79,28 +79,27 @@ export class LoginPage {
           err => {
             console.log(err);
             loading.dismiss();
-            this._chamarAlerta("Erro na informações", "Não foi possivel obter informações!");
+            return this._chamarAlerta("Erro na informações", "Não foi possivel obter informações!", err);
           });
       },
       err =>  {
         console.log(err);
         loading.dismiss();
-        this._chamarAlerta('Erro na autenticação', 'E-mail ou senha incorreto!');
-        return false;
+        return this._chamarAlerta('Erro na autenticação', 'Não foi possível autenticar. Tente novamente mais tarde!', err);
       }
     );
   }
 
-  _chamarAlerta(titulo: string, msg: string) {
+  _chamarAlerta(titulo: string, subtitle: string, erro: string = titulo) {
     this._alerta.create({
       title: titulo,
-      subTitle: msg,
+      subTitle: subtitle,
       buttons: [
         { text: 'OK' }
       ]
     }).present();
 
-    return [{'erro':true, 'msg':msg}];
+    return [{'erro':true, 'msg':erro}];
   }
 
   reset() {
@@ -119,7 +118,7 @@ export class LoginPage {
       localizedFallbackTitle: 'Use Pin', 
       localizedReason: 'Please authenticate' 
   })
-  .then((result: any) => (result == 'OK' ? this.efetuarLogin() : ''))
-  .catch((error: any) => console.log(error));
+  .then((res: any) => this.efetuarLogin())
+  .catch((err: any) => this._chamarAlerta('Erro na autenticação', 'Não foi possível autenticar. Houve alguma falha com biometria!', err));
   }
 }

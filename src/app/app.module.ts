@@ -1,3 +1,4 @@
+import { InfoPage } from './../pages/info/info';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/mergeMap';
@@ -12,9 +13,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RegisterServiceProvider } from '../providers/register-service/register-service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage'
-import { InterceptorProvider } from '../providers/interceptor/interceptor';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 import { LoginPage } from '../pages/login/login';
@@ -24,22 +24,21 @@ import { InfosServiceProvider } from '../providers/infos-service/infos-service';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    InfoPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    IonicModule.forRoot(MyApp,{
-      scrollPadding: false,
-      scrollAssist: false
-    })
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    InfoPage
   ],
   providers: [
     StatusBar,
@@ -47,7 +46,6 @@ import { InfosServiceProvider } from '../providers/infos-service/infos-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RegisterServiceProvider,
     LoginServiceProvider,
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true},
     FingerprintAIO,
     InfosServiceProvider 
   ]
