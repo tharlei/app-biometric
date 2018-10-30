@@ -1,6 +1,6 @@
 <ion-header class="header">
-  <ion-item color="secondary"></ion-item>
-  <ion-navbar color="secondary">
+  <ion-item color="green"></ion-item>
+  <ion-navbar color="green">
       <ion-title>
           <ion-icon name="list"></ion-icon>
           <span>&nbsp; Informações</span>
@@ -13,7 +13,7 @@
   <ion-item *ngFor="let info of infos" (click)="selecionaInfo(info)" >
     <h2>{{info.title}}</h2>
     <small>{{info.subtitle}}</small>
-    <ion-icon color="green" icon-only item-end name="information-circle"></ion-icon>
+    <ion-icon color="primary" icon-only item-end name="information-circle"></ion-icon>
   </ion-item>
 
   <ion-fab top right edge>

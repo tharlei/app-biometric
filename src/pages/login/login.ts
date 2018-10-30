@@ -63,6 +63,7 @@ export class LoginPage {
     }
 
     this._loginService.acessar(usuario)
+    .timeout(3000)
     .subscribe(
       res => {
         let token = (res['token_type'] + " " + res['access_token']);
@@ -70,6 +71,7 @@ export class LoginPage {
         this._storage.set('email', usuario.email);
         this._storage.set('password', usuario.password);
         this._infosService.lista(token)
+          .timeout(3000)
           .subscribe(res => {
             loading.dismiss();
             this._navCtrl.setRoot(HomePage, {
@@ -79,7 +81,7 @@ export class LoginPage {
           err => {
             console.log(err);
             loading.dismiss();
-            return this._chamarAlerta("Erro na informações", "Não foi possivel obter informações!", err);
+            return this._chamarAlerta("Erro na informações", "Não foi possivel obter noticias. tente novamente mais tarde!", err);
           });
       },
       err =>  {
@@ -112,7 +114,7 @@ export class LoginPage {
 
   autenticacao() {
     this._finger.show({
-      clientId: 'aps-biometria',
+      clientId: 'nature-news',
       clientSecret: 'password', 
       disableBackup:true,  
       localizedFallbackTitle: 'Use Pin', 
