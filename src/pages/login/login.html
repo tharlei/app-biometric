@@ -1,39 +1,41 @@
-<ion-content class="body" padding>
-    <ion-item>
-        <img src="assets/imgs/logo-gov.png" alt="MyApp">
-    </ion-item>
+<ion-content scroll="false">
+    <div class="splash-bg">
+        <h3>Ministério do</h3>
+        <h2>Meio Ambiente</h2>
+    </div>
+    <div class="splash-info">
+      <div class="splash-logo"></div>
+    </div>
+    <div padding>
+        <ion-item-group *ngIf="(!armazenado)"> 
+            <ion-item>
+                <ion-label color="dark" floating>E-mail</ion-label>
+                <ion-input type="email" [(ngModel)]="email" id="email" name="email"></ion-input>
+            </ion-item>
 
-    <form [class]="armazenado ? 'sumir' : ''" (ngSubmit)="efetuarLogin()" #formulario="ngForm">
-
-        <ion-item>
-            <ion-label color="light" floating>E-mail</ion-label>
-            <ion-input type="email" [(ngModel)]="email" id="email" name="email"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label color="light" floating>Senha</ion-label>
-            <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
-        </ion-item>
-        <h6 ion-text end color="primary">Esqueceu a senha?</h6>
-    </form>
-
-    <ion-item-group *ngIf="(!armazenado)"> 
-        <button ion-button block color="yellow" (click)="formulario.ngSubmit.emit()">
-            <label item-start >Entrar &nbsp;</label>
-            <ion-icon name="open"></ion-icon>
-        </button>
-    </ion-item-group>
-
-    <ion-item-group *ngIf="(armazenado)">
-        <ion-label color="light">Você é {{this.email}}?</ion-label>
-        <button ion-button block color="yellow" (click)="autenticacao()">
-            <label item-start >Autenticar &nbsp;</label>
-            <ion-icon item-end name="finger-print"></ion-icon>
-        </button>
-        <ion-item-divider></ion-item-divider>
-        <button ion-button block color="orange" (click)="reset()" >
-            <label item-start >Reentrar &nbsp;</label>
-            <ion-icon name="create"></ion-icon>
-        </button>
-    </ion-item-group>
+            <ion-item>
+                <ion-label color="dark" floating>Senha</ion-label>
+                <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+            </ion-item>
+            <h6 ion-text end color="primary">Esqueceu a senha?</h6>
+        
+            <button ion-button block color="yellow" (click)="efetuarLogin()">
+                <label item-start >Entrar &nbsp;</label>
+                <ion-icon name="open"></ion-icon>
+            </button>
+        </ion-item-group>
+    
+        <ion-item-group *ngIf="(armazenado)">
+            <ion-label color="dark">Você é {{this.email}}?</ion-label>
+            <button ion-button block color="yellow" (click)="autenticacao()">
+                <label item-start >Autenticar &nbsp;</label>
+                <ion-icon item-end name="finger-print"></ion-icon>
+            </button>
+            <ion-item-divider></ion-item-divider>
+            <button ion-button block color="primary" (click)="reset()" >
+                <label item-start >Reentrar &nbsp;</label>
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-item-group>
+    </div>
 </ion-content>

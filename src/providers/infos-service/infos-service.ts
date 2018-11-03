@@ -1,4 +1,3 @@
-import { Storage } from '@ionic/storage';
 import { Info } from './../../models/info';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,10 +6,8 @@ import { Injectable } from '@angular/core';
 export class InfosServiceProvider {
   //
   private _url = 'http://api-fingerprint.herokuapp.com/api';
-  private _token;
 
-  constructor(public http: HttpClient,
-    private _storage: Storage) {
+  constructor(public http: HttpClient) {
   }
 
   lista(token) {

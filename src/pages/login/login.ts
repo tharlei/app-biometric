@@ -63,7 +63,7 @@ export class LoginPage {
     }
 
     this._loginService.acessar(usuario)
-    .timeout(3000)
+    .timeout(20000)
     .subscribe(
       res => {
         let token = (res['token_type'] + " " + res['access_token']);
@@ -71,7 +71,7 @@ export class LoginPage {
         this._storage.set('email', usuario.email);
         this._storage.set('password', usuario.password);
         this._infosService.lista(token)
-          .timeout(3000)
+          .timeout(20000)
           .subscribe(res => {
             loading.dismiss();
             this._navCtrl.setRoot(HomePage, {

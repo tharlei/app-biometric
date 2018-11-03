@@ -1,37 +1,44 @@
 page-login {
-    img {
-        width: 100%;
-        height: auto;
-        margin-bottom: 5px;
-        border: 0px;
-    }
-    ion-item > .item-inner {
-        border-bottom: 0px!important;
-    }
-    .button {
-        margin-top: 10%;
-    }
     h6 {
         font-size: 12px;
         text-align: right;
-        cursor: pointer;
+        margin-bottom: 3em;
     }
-    .sumir {
-        display: none;
+    h3 {
+        margin-top: 0;
+        color: #f4f4f4;
+        padding-top: 5rem;
     }
-    .body {
-        background-image: linear-gradient(to top, #065d16 0%, #127824 100%);
-    }
-    ion-item, ion-item-divider {
-        background-color: rgba(255, 255, 255, 0)!important;
-    }
-    ion-label, h6 {
+    h2 {
+        margin-top: 0;
+        color: #f4f4f4;
         font-weight: bold;
-    }
-    ion-input {
-        color: white;
     }
     button {
         border-radius: 16px!important;
+    }
+    .splash-bg {
+        text-align: center;
+        position: relative;
+        background-image: linear-gradient(to top, #065d16 0%, #127824 100%);
+        height: 180px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .splash-info {
+        position: relative;
+        z-index: 2;
+        margin-top: -64px;
+        text-align: center;
+    }
+    .splash-logo {
+        margin: auto;
+        background: url('../assets/imgs/logo.png') no-repeat transparent;
+        background-size: 100%;
+        margin-top: 25px;
+        width: 220px;
+        height: 70px;
+    }
+    ion-item-divider {
+        margin-bottom: 10%;
     }
 }
