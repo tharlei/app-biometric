@@ -1,12 +1,9 @@
 page-home {
-    .header ion-item > .item-inner {
-        border-bottom: 0px!important;
-    }
     .body {
         background-color: #f4f4f4;
     }
-    .body ion-item, ion-item-divider {
-        background-color: rgba(255, 255, 255, 0)!important;
+    .transparente > .item-inner {
+        border-bottom: 0px!important;
     }
     .body h2 {
         font-weight: bold;

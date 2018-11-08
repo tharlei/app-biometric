@@ -1,3 +1,5 @@
+import { Info } from './../../models/info';
+import { UserServiceProvider } from './../../providers/user-service/user-service';
 import { InfosServiceProvider } from './../../providers/infos-service/infos-service';
 import { Storage } from '@ionic/storage';
 import { LoginServiceProvider } from './../../providers/login-service/login-service';
@@ -16,6 +18,7 @@ export class LoginPage {
   public armazenado: boolean = false;
   public email: string = '';
   public password: string = '';
+  public name: string = '';
 
   constructor(private _navCtrl: NavController,
     private _alerta: AlertController,
@@ -23,7 +26,8 @@ export class LoginPage {
     private _storage: Storage,
     private _loading: LoadingController,
     private _finger: FingerprintAIO,
-    private _infosService: InfosServiceProvider) {
+    private _infosService: InfosServiceProvider,
+    private _userService: UserServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -74,14 +78,25 @@ export class LoginPage {
           .timeout(20000)
           .subscribe(res => {
             loading.dismiss();
-            this._navCtrl.setRoot(HomePage, {
-              informacoes: res
-            });
+            let infos: Info[] = res;
+            this._userService.sobre(token)
+              .timeout(20000)
+              .subscribe(() => {
+                loading.dismiss();
+                this._navCtrl.setRoot(HomePage, {
+                  informacoes: infos
+                });
+              },
+              err => {
+                console.log(err);
+                loading.dismiss();
+                return this._chamarAlerta("Erro na usuário", "Não foi possivel obter usuário. Tente novamente mais tarde!", err);
+              });
           },
           err => {
             console.log(err);
             loading.dismiss();
-            return this._chamarAlerta("Erro na informações", "Não foi possivel obter noticias. tente novamente mais tarde!", err);
+            return this._chamarAlerta("Erro na informações", "Não foi possivel obter noticias. Tente novamente mais tarde!", err);
           });
       },
       err =>  {
@@ -122,5 +137,9 @@ export class LoginPage {
   })
   .then((res: any) => this.efetuarLogin())
   .catch((err: any) => this._chamarAlerta('Erro na autenticação', 'Não foi possível autenticar. Houve alguma falha com biometria!', err));
+  }
+
+  get usuarioLogado() {
+    return this._userService.logado();
   }
 }

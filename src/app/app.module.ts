@@ -19,6 +19,7 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 import { LoginPage } from '../pages/login/login';
 import { InfosServiceProvider } from '../providers/infos-service/infos-service';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { InfosServiceProvider } from '../providers/infos-service/infos-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LoginServiceProvider,
     FingerprintAIO,
-    InfosServiceProvider 
+    InfosServiceProvider,
+    UserServiceProvider 
   ]
 })
 export class AppModule {}

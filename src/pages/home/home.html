@@ -1,6 +1,9 @@
-<ion-header class="header">
-  <ion-item color="green"></ion-item>
+<ion-header>
+  <ion-item color="green" class="transparente"></ion-item>
   <ion-navbar color="green">
+      <button ion-button menuToggle>
+        <ion-icon name="contact"></ion-icon>
+      </button>
       <ion-title>
           <span>&nbsp; Informações</span>
       </ion-title>
@@ -15,10 +18,12 @@
     <ion-icon color="primary" icon-only item-end name="information-circle"></ion-icon>
   </ion-item>
 
-  <ion-fab top right edge>
+  <ion-item class="transparente"></ion-item>
+
+  <!-- <ion-fab top right edge>
     <button ion-fab mini color="orange" (click)="exit()" >
       <ion-icon name="exit"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab> -->
 
 </ion-content>

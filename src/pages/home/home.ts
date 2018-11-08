@@ -22,11 +22,6 @@ export class HomePage {
   ionViewDidLoad() {
   }
 
-  exit() {
-    this._storage.remove('token');
-    this._navCtrl.setRoot(LoginPage);
-  }
-
   selecionaInfo(info: Info) {
     this._navCtrl.push(InfoPage, {
       infoSelecionada: info

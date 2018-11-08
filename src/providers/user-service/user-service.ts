@@ -1,23 +1,33 @@
-import { Info } from './../../models/info';
+import { User } from './../../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class InfosServiceProvider {
-  //
+export class UserServiceProvider {
+
   private _url = 'http://api-fingerprint.herokuapp.com/api';
+  public user: User;
 
   constructor(public http: HttpClient) {
   }
 
-  lista(token) {
+  sobre(token) {
     return this.http
-        .get<Info[]>(this._url+'/v1/informacoes', {
+        .get<User>(this._url+'/user', {
           headers: {
             'content':"application/json",
             'contet-type':"application/x-www-form-urlencoded",
             Authorization: `${token}`
           }
-        });
+        })
+        .do((user: User) => this.user = user);
+  }
+
+  logado() {
+    return this.user;
+  }
+
+  deslogar() {
+    this.user = null;
   }
 }

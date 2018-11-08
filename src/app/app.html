@@ -1,1 +1,26 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-split-pane>
+    <ion-menu [content]="conteudo" *ngIf="usuarioLogado">
+        <ion-item></ion-item>
+        <ion-content>
+            <ion-item id="cabecalho-menu" class="cabecalho-menu">
+                <div>
+                    <ion-avatar item-start>
+                        <img src="../assets/imgs/user.png">
+                    </ion-avatar>
+                </div>
+                <h2>{{ usuarioLogado.name }}</h2>
+                <p>{{ usuarioLogado.email }}</p>
+                <br>
+                <p>Nível: {{ usuarioLogado.level }}</p>
+            </ion-item>
+
+            <button ion-button block color="orange" (click)="exit()">
+                <ion-item-group class="inner-button">
+                    <label item-start >Sair &nbsp;</label>
+                    <ion-icon name="exit"></ion-icon>
+                </ion-item-group>
+            </button>
+        </ion-content>
+    </ion-menu>
+    <ion-nav [root]="rootPage" main #conteudo swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>
