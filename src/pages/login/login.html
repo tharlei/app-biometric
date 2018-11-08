@@ -31,14 +31,12 @@
     <ion-item-group *ngIf="(armazenado)">
         <div class="buttons">
             <button ion-button block color="secondary" (click)="autenticacao()" class="finger-button">
-                <!-- <label item-start >Autenticar &nbsp;</label> -->
                 <ion-icon item-end name="finger-print"></ion-icon>
             </button>
             <button ion-button block color="danger" (click)="reset()" class="finger-button">
-                <!-- <label item-start >Reentrar &nbsp;</label> -->
                 <ion-icon name="close"></ion-icon>
             </button>
         </div>
-        <ion-label class="confirm-user">Você é <span>{{usuarioLogado.name}}</span> ?</ion-label>
+        <ion-label class="confirm-user">Você é <span>{{this.name}}</span> ?</ion-label>
     </ion-item-group>
 </ion-content>

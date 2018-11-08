@@ -6,7 +6,11 @@ import { Injectable } from '@angular/core';
 export class UserServiceProvider {
 
   private _url = 'http://api-fingerprint.herokuapp.com/api';
-  public user: User;
+  public user: User = {
+    name: '',
+    email: '',
+    level: 0
+  };
 
   constructor(public http: HttpClient) {
   }
@@ -28,6 +32,10 @@ export class UserServiceProvider {
   }
 
   deslogar() {
-    this.user = null;
+    this.user = {
+      name: '',
+      email: '',
+      level: 0
+    };
   }
 }

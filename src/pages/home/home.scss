@@ -12,4 +12,7 @@ page-home {
     .body h2, small {
         color: #222222;
     }
+    .body ion-item, ion-item-divider {
+        background-color: rgba(255, 255, 255, 0)!important;
+    }
 }

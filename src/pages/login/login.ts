@@ -49,6 +49,11 @@ export class LoginPage {
         .catch(err => console.log(err));
       }
     });
+    this._storage.get('name').then(val => {
+      if (val) {
+        this.name = val;
+      }
+    });
   }
 
   efetuarLogin() {
@@ -81,8 +86,9 @@ export class LoginPage {
             let infos: Info[] = res;
             this._userService.sobre(token)
               .timeout(20000)
-              .subscribe(() => {
+              .subscribe(res => {
                 loading.dismiss();
+                this._storage.set('name', res.name);
                 this._navCtrl.setRoot(HomePage, {
                   informacoes: infos
                 });
@@ -120,11 +126,11 @@ export class LoginPage {
   }
 
   reset() {
-    this._storage.remove('email');
-    this._storage.remove('password');
+    this._storage.clear();
     this.armazenado = false
     this.email = '';
     this.password = '';
+    this.name = '';
   }
 
   autenticacao() {
@@ -137,9 +143,5 @@ export class LoginPage {
   })
   .then((res: any) => this.efetuarLogin())
   .catch((err: any) => this._chamarAlerta('Erro na autenticação', 'Não foi possível autenticar. Houve alguma falha com biometria!', err));
-  }
-
-  get usuarioLogado() {
-    return this._userService.logado();
   }
 }

@@ -1,5 +1,5 @@
 <ion-split-pane>
-    <ion-menu [content]="conteudo" *ngIf="usuarioLogado">
+    <ion-menu [content]="conteudo" [class]="usuarioLogado.name != '' ? '' : 'sumir'">
         <ion-item></ion-item>
         <ion-content>
             <ion-item id="cabecalho-menu" class="cabecalho-menu">
@@ -14,7 +14,7 @@
                 <p>Nível: {{ usuarioLogado.level }}</p>
             </ion-item>
 
-            <button ion-button block color="orange" (click)="exit()">
+            <button ion-button block menuClose color="orange" (click)="exit()">
                 <ion-item-group class="inner-button">
                     <label item-start >Sair &nbsp;</label>
                     <ion-icon name="exit"></ion-icon>

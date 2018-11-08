@@ -2,15 +2,24 @@
   <ion-item color="green" class="transparente"></ion-item>
   <ion-navbar color="green">
       <button ion-button menuToggle>
-        <ion-icon name="contact"></ion-icon>
+        <ion-icon name="menu"></ion-icon>
       </button>
       <ion-title>
-          <span>&nbsp; Informações</span>
+          <span>&nbsp; Notícias</span>
       </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="body">
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Puxe para recarregar"
+        refreshingSpinner="circles"
+        refreshingText="Recarregando...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <ion-item *ngFor="let info of infos" (click)="selecionaInfo(info)" >
     <h2>{{info.title}}</h2>
@@ -19,11 +28,5 @@
   </ion-item>
 
   <ion-item class="transparente"></ion-item>
-
-  <!-- <ion-fab top right edge>
-    <button ion-fab mini color="orange" (click)="exit()" >
-      <ion-icon name="exit"></ion-icon>
-    </button>
-  </ion-fab> -->
 
 </ion-content>

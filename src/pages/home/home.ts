@@ -1,9 +1,9 @@
+import { InfosServiceProvider } from './../../providers/infos-service/infos-service';
 import { InfoPage } from './../info/info';
 import { Info } from './../../models/info';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -15,7 +15,9 @@ export class HomePage {
 
   constructor(private _navCtrl: NavController,
     private _navParams: NavParams,
-    private _storage: Storage) {
+    private _storage: Storage,
+    private _infoService: InfosServiceProvider,
+    private _alerta: AlertController) {
       this.infos = this._navParams.get('informacoes');
   }
 
@@ -26,5 +28,36 @@ export class HomePage {
     this._navCtrl.push(InfoPage, {
       infoSelecionada: info
     });
+  }
+
+  doRefresh(refresher) {
+    this._storage.get('token')
+      .then(
+        token => {
+          this._infoService.lista(token)
+            .subscribe(
+              res => {
+                this.infos = res;
+                refresher.complete();
+              },
+              err => {
+                this._chamarAlerta('Erro recarregamento', 'Falha com conexão com servidor, tente novamente mais tarde!', err);
+                refresher.complete();
+              }
+            )
+        }
+      )
+  }
+
+  _chamarAlerta(titulo: string, subtitle: string, erro: string = titulo) {
+    this._alerta.create({
+      title: titulo,
+      subTitle: subtitle,
+      buttons: [
+        { text: 'OK' }
+      ]
+    }).present();
+
+    return [{'erro':true, 'msg':erro}];
   }
 }
